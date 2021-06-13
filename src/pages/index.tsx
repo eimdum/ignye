@@ -1,7 +1,8 @@
+import { HomeModule } from "@modules";
 import React from "react";
 
 function Index() {
-    return <div>Hello</div>;
+    return <HomeModule />;
 }
 
 export default Index;
