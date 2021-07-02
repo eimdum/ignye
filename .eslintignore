@@ -1,4 +1,6 @@
 .next
 node_modules
+jest.config.js
 next.config.js
 public
+next-env.d.ts
