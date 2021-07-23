@@ -1,8 +1,10 @@
-import { HomeModule } from "@modules";
 import React from "react";
+import { NextPage } from "next";
 
-function Index(): JSX.Element {
+import { HomeModule } from "@modules";
+
+const Index: NextPage = () => {
     return <HomeModule />;
-}
+};
 
 export default Index;
