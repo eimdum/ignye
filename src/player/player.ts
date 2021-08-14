@@ -11,27 +11,27 @@ export class PlayerBase {
     };
     private experience = 0;
 
-    public updatePlayerStats(stats: PlayerBaseStats): void {
+    updatePlayerStats(stats: PlayerBaseStats): void {
         this.baseStats = stats;
     }
 
-    public getPlayerStats(): PlayerBaseStats {
+    getPlayerStats(): PlayerBaseStats {
         return this.baseStats;
     }
 
-    public powerAttack(): number {
+    powerAttack(): number {
         return this.baseStats.strength;
     }
 
-    public magicAttack(): number {
+    magicAttack(): number {
         return this.baseStats.intelligence;
     }
 
-    public updateExperience(exp: number): void {
+    updateExperience(exp: number): void {
         this.experience += exp;
     }
 
-    public getExperience(): number {
+    getExperience(): number {
         return this.experience;
     }
 }
