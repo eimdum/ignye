@@ -7,11 +7,16 @@ import { Button } from "src/components/base";
 type Enemy = PlayerBaseStats;
 const player = new PlayerBase();
 
+const defaultEnemy: Enemy = { hp: 10, mp: 10, strength: 1, intelligence: 1, magicDefense: 1, powerDefense: 1 };
+
 export const HomeModule = (): JSX.Element => {
-    const defaultEnemy: Enemy = { hp: 10, mp: 10, strength: 1, intelligence: 1, magicDefense: 1, powerDefense: 1 };
     const [enemy, setEnemy] = React.useState<Enemy>(defaultEnemy);
 
-    const onResetEnemyClick = () => setEnemy(defaultEnemy);
+    React.useEffect(() => {
+        if (enemy.hp === 0) {
+            setTimeout(() => setEnemy(defaultEnemy), 2000);
+        }
+    }, [enemy.hp]);
 
     const updatePlayersExp = (enemyHp: number, playerDamage: number) => {
         const reducedEnemyHp = enemyHp - playerDamage;
@@ -33,63 +38,37 @@ export const HomeModule = (): JSX.Element => {
     };
 
     return (
-        <div className="p-6 flex flex-1 items-center justify-center space-x-12">
+        <div className="p-6 flex flex-1 flex-col items-center justify-center space-y-16">
             <Card header="Player">
-                <div>Player content</div>
-                <div>
-                    <Button>Action button</Button>
+                <div className="flex flex-col font-medium text-gray-600">
+                    <div>HP: {player.getPlayerStats().hp}</div>
+                    <div>MP: {player.getPlayerStats().mp}</div>
+                    <div>EXP: {player.getExperience()}</div>
+                </div>
+                <div className="actions space-x-4">
+                    <Button className="bg-yellow-600" disabled={enemy.hp === 0} onClick={onPowerAttackClick}>
+                        Power Attack
+                    </Button>
+                    <Button
+                        className="bg-green-600"
+                        disabled={enemy.hp === 0 || player.getPlayerStats().mp === 0}
+                        onClick={onMagicAttackClick}
+                    >
+                        Magic Attack
+                    </Button>
                 </div>
             </Card>
+
             <Card header="Enemy">
-                <div>Enemy content</div>
-                <div>
-                    <Button>Action button</Button>
-                </div>
+                {enemy.hp === 0 ? (
+                    <div className="text-xl font-semibold text-gray-700">Searching for new enemy...</div>
+                ) : (
+                    <div className="flex flex-col font-medium text-gray-600">
+                        <div>HP: {enemy.hp}</div>
+                        <div>MP: {enemy.mp}</div>
+                    </div>
+                )}
             </Card>
         </div>
     );
-
-    // return {
-    //     /* <div className="font-bold text-xl p-4">Player</div>
-    //         <div className="flex flex-col mb-4">
-    //             <div>HP: {player.getPlayerStats().hp}</div>
-    //             <div>MP: {player.getPlayerStats().mp}</div>
-    //             <div>EXP: {player.getExperience()}</div>
-    //         </div>
-    //         <div className="font-bold text-xl p-4">Actions</div>
-    //         <div className="flex mb-4 space-x-4 text-sm">
-    //             <div>
-    //                 <button
-    //                     className="bg-green-500 text-green-50 p-3 font-medium rounded-md leading-relaxed hover:bg-green-700 disabled:bg-gray-200 disabled:text-gray-400 tracking-wide"
-    //                     disabled={enemy.hp === 0}
-    //                     onClick={onPowerAttackClick}
-    //                 >
-    //                     Power Attack
-    //                 </button>
-    //             </div>
-    //             <div>
-    //                 <button
-    //                     className="bg-blue-500 text-blue-50 p-3 font-medium rounded-md leading-relaxed hover:bg-blue-700 disabled:bg-gray-200 disabled:text-gray-400 tracking-wide"
-    //                     disabled={enemy.hp === 0 || player.getPlayerStats().mp === 0}
-    //                     onClick={onMagicAttackClick}
-    //                 >
-    //                     Magic Attack
-    //                 </button>
-    //             </div>
-    //         </div>
-    //         <div className="font-bold text-xl p-4">Enemy</div>
-    //         <div className="flex flex-col mb-4">
-    //             <div>HP: {enemy.hp}</div>
-    //             <div>MP: {enemy.mp}</div>
-    //         </div>
-    //         <div className="flex mb-4 space-x-4 text-sm tracking-wide">
-    //             <button
-    //                 className="bg-red-500 text-red-50 disabled:bg-gray-200 disabled:text-gray-400 p-3 tracking-wide font-medium rounded-md leading-relaxed"
-    //                 disabled={enemy.hp !== 0}
-    //                 onClick={onResetEnemyClick}
-    //             >
-    //                 Reset Enemy
-    //             </button>
-    //         </div> */
-    // };
 };

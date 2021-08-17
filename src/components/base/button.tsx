@@ -11,7 +11,7 @@ export const Button = (props: ButtonProps): JSX.Element => {
     return (
         <button
             className={classNames(
-                "bg-blue-600 text-white text-opacity-90 hover:bg-opacity-90 bg-disabled:bg-gray-200 disabled:text-gray-400 p-2 text-sm font-semibold rounded-md",
+                "bg-gray-600 text-white text-opacity-90 hover:bg-opacity-90 disabled:bg-gray-200 disabled:text-gray-400 p-2 text-sm font-medium rounded tracking-wide",
                 className,
             )}
             {...rest}
