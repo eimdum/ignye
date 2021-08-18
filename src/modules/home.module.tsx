@@ -38,37 +38,39 @@ export const HomeModule = (): JSX.Element => {
     };
 
     return (
-        <div className="p-6 flex flex-1 flex-col items-center justify-center space-y-16">
-            <Card header="Player">
-                <div className="flex flex-col font-medium text-gray-600">
-                    <div>HP: {player.getPlayerStats().hp}</div>
-                    <div>MP: {player.getPlayerStats().mp}</div>
-                    <div>EXP: {player.getExperience()}</div>
-                </div>
-                <div className="actions space-x-4">
-                    <Button className="bg-yellow-600" disabled={enemy.hp === 0} onClick={onPowerAttackClick}>
-                        Power Attack
-                    </Button>
-                    <Button
-                        className="bg-green-600"
-                        disabled={enemy.hp === 0 || player.getPlayerStats().mp === 0}
-                        onClick={onMagicAttackClick}
-                    >
-                        Magic Attack
-                    </Button>
-                </div>
-            </Card>
-
-            <Card header="Enemy">
-                {enemy.hp === 0 ? (
-                    <div className="text-xl font-semibold text-gray-700">Searching for new enemy...</div>
-                ) : (
+        <div className="p-6 flex flex-1 items-center">
+            <div className="flex flex-1 justify-center space-x-16">
+                <Card header="Player">
                     <div className="flex flex-col font-medium text-gray-600">
-                        <div>HP: {enemy.hp}</div>
-                        <div>MP: {enemy.mp}</div>
+                        <div>HP: {player.getPlayerStats().hp}</div>
+                        <div>MP: {player.getPlayerStats().mp}</div>
+                        <div>EXP: {player.getExperience()}</div>
                     </div>
-                )}
-            </Card>
+                    <div className="actions space-x-4">
+                        <Button className="bg-yellow-600 active:bg-yellow-700" disabled={enemy.hp === 0} onClick={onPowerAttackClick}>
+                            Power Attack
+                        </Button>
+                        <Button
+                            className="bg-green-600 active:bg-green-700"
+                            disabled={enemy.hp === 0 || player.getPlayerStats().mp === 0}
+                            onClick={onMagicAttackClick}
+                        >
+                            Magic Attack
+                        </Button>
+                    </div>
+                </Card>
+
+                <Card header="Enemy">
+                    {enemy.hp === 0 ? (
+                        <div className="text-xl font-semibold text-gray-700">Searching for new enemy...</div>
+                    ) : (
+                        <div className="flex flex-col font-medium text-gray-600">
+                            <div>HP: {enemy.hp}</div>
+                            <div>MP: {enemy.mp}</div>
+                        </div>
+                    )}
+                </Card>
+            </div>
         </div>
     );
 };

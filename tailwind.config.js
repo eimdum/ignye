@@ -6,8 +6,11 @@ module.exports = {
     },
     variants: {
         extend: {
-            backgroundColor: ["disabled"],
+            backgroundColor: ["disabled", "focus", "active"],
+            backgroundBlendMode: ["hover", "focus", "active"],
             textColor: ["disabled"],
+            opacity: ["active"],
+            cursor: ["disabled", "hover", "focus"],
         },
     },
     plugins: [],
