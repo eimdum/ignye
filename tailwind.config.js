@@ -9,7 +9,7 @@ module.exports = {
             backgroundColor: ["disabled", "focus", "active"],
             backgroundBlendMode: ["hover", "focus", "active"],
             textColor: ["disabled"],
-            opacity: ["active"],
+            opacity: ["active", "disabled"],
             cursor: ["disabled", "hover", "focus"],
         },
     },

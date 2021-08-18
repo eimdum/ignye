@@ -11,7 +11,7 @@ export const Button = (props: ButtonProps): JSX.Element => {
     return (
         <button
             className={classNames(
-                "focus:outline-none focus:ring focus:ring-opacity-50 bg-gray-600 text-white text-opacity-90 hover:bg-opacity-90 disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed p-2 text-sm font-medium rounded tracking-wide",
+                "focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 bg-gray-600 text-white text-opacity-90 hover:bg-opacity-90 disabled:opacity-50 disabled:cursor-not-allowed p-2 text-sm font-medium rounded tracking-wide",
                 className,
             )}
             {...rest}
