@@ -1,8 +1,9 @@
 import React from "react";
 
-import { PlayerBase, PlayerBaseStats } from "@player";
-import { Card } from "src/components/layout";
-import { Button } from "src/components/base";
+import { Button } from "@components/base";
+import { Card } from "@components/layout";
+import { PlayerBaseStats, PlayerBase } from "@characters/player";
+import "@characters/base/base-character.class";
 
 type Enemy = PlayerBaseStats;
 const player = new PlayerBase();
@@ -38,8 +39,8 @@ export const HomeModule = (): JSX.Element => {
     };
 
     return (
-        <div className="p-6 flex flex-1 items-center">
-            <div className="flex flex-1 justify-center space-x-16">
+        <div className="p-16 flex flex-1 items-center">
+            <div className="flex flex-1 space-x-16">
                 <Card header="Player">
                     <div className="flex flex-col font-medium text-gray-600">
                         <div>HP: {player.getPlayerStats().hp}</div>
