@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "baseUrl": ".",
+        "baseUrl": "./",
         "target": "es5",
         "lib": ["dom", "dom.iterable", "esnext"],
         "allowJs": true,
@@ -16,10 +16,11 @@
         "jsx": "preserve",
         "typeRoots": ["./node_modules/@types"],
         "paths": {
-            "@components": ["src/components"],
-            "@modules": ["src/modules"]
+            "@components/*": ["src/components/*"],
+            "@modules/*": ["src/modules/*"],
+            "@characters/*": ["src/characters/*"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules, postcss.config.js, tailwind.config.js"]
 }
