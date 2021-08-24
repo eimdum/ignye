@@ -1,4 +1,4 @@
-export type BaseCharacterType = "NPC" | "Player";
+export type BaseCharacterType = "NPC" | "Player" | "UNSET";
 
 export interface IBaseCharacterProgress {
     currentLevel: number;
@@ -7,23 +7,14 @@ export interface IBaseCharacterProgress {
     nextLevelExperience?: number;
 }
 
-export type INpcProgress = IBaseCharacterProgress;
-export type IPlayerProgress = Required<IBaseCharacterProgress>;
-
 export interface IBaseCharacterStats {
     hp: number;
     mp: number;
-    attackDamage: number;
-    magicDamage: number;
+    strength: number;
+    magic: number;
+    attack: number;
+    magicAttack: number;
+    defense: number;
+    magicDefense: number;
     type: BaseCharacterType;
-}
-
-export interface IPlayerStats extends IBaseCharacterStats {
-    type: "Player";
-    progress: IPlayerProgress;
-}
-
-export interface INpcStats extends IBaseCharacterStats {
-    type: "NPC";
-    progress: INpcProgress;
 }

@@ -1,77 +1,14 @@
 import React from "react";
 
-import { Button } from "@components/base";
-import { Card } from "@components/layout";
-import { PlayerBaseStats, PlayerBase } from "@characters/player";
-import "@characters/base/base-character.class";
-
-type Enemy = PlayerBaseStats;
-const player = new PlayerBase();
-
-const defaultEnemy: Enemy = { hp: 10, mp: 10, strength: 1, intelligence: 1, magicDefense: 1, powerDefense: 1 };
+import { Player } from "@characters/player";
+import { NPC } from "@characters/npc";
+import { defaultNPCStats, defaultPlayerStats } from "@characters/constants";
 
 export const HomeModule = (): JSX.Element => {
-    const [enemy, setEnemy] = React.useState<Enemy>(defaultEnemy);
-
-    React.useEffect(() => {
-        if (enemy.hp === 0) {
-            setTimeout(() => setEnemy(defaultEnemy), 2000);
-        }
-    }, [enemy.hp]);
-
-    const updatePlayersExp = (enemyHp: number, playerDamage: number) => {
-        const reducedEnemyHp = enemyHp - playerDamage;
-
-        if (reducedEnemyHp <= 0) {
-            player.updateExperience(Math.ceil(Math.random() * Math.floor(Math.random() * 6) + 1));
-        }
-
-        return reducedEnemyHp;
-    };
-
-    const onPowerAttackClick = () => setEnemy((prevState) => ({ ...prevState, hp: updatePlayersExp(prevState.hp, player.powerAttack()) }));
-
-    const onMagicAttackClick = () => {
-        const playerStats = player.getPlayerStats();
-
-        player.updatePlayerStats({ ...playerStats, mp: playerStats.mp - 1 });
-        setEnemy((prevState) => ({ ...prevState, hp: updatePlayersExp(prevState.hp, player.magicAttack()) }));
-    };
-
     return (
-        <div className="p-16 flex flex-1 items-center">
-            <div className="flex flex-1 space-x-16">
-                <Card header="Player">
-                    <div className="flex flex-col font-medium text-gray-600">
-                        <div>HP: {player.getPlayerStats().hp}</div>
-                        <div>MP: {player.getPlayerStats().mp}</div>
-                        <div>EXP: {player.getExperience()}</div>
-                    </div>
-                    <div className="actions space-x-4">
-                        <Button className="bg-yellow-600 active:bg-yellow-700" disabled={enemy.hp === 0} onClick={onPowerAttackClick}>
-                            Power Attack
-                        </Button>
-                        <Button
-                            className="bg-green-600 active:bg-green-700"
-                            disabled={enemy.hp === 0 || player.getPlayerStats().mp === 0}
-                            onClick={onMagicAttackClick}
-                        >
-                            Magic Attack
-                        </Button>
-                    </div>
-                </Card>
-
-                <Card header="Enemy">
-                    {enemy.hp === 0 ? (
-                        <div className="text-xl font-semibold text-gray-700">Searching for new enemy...</div>
-                    ) : (
-                        <div className="flex flex-col font-medium text-gray-600">
-                            <div>HP: {enemy.hp}</div>
-                            <div>MP: {enemy.mp}</div>
-                        </div>
-                    )}
-                </Card>
-            </div>
+        <div className="flex flex-col space-y-8">
+            <pre>{JSON.stringify(new Player(defaultPlayerStats).getBaseStats(), null, 4)}</pre>
+            <pre>{JSON.stringify(new NPC(defaultNPCStats).getBaseStats(), null, 4)}</pre>
         </div>
     );
 };

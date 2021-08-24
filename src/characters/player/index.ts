@@ -1,2 +1,1 @@
-export * from "./player";
-export * from "./player.interfaces";
+export * from "./player.class";
